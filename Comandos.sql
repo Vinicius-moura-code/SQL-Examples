@@ -146,3 +146,70 @@ WHERE primeiro_nome = 'Pedro'
 
 SELECT * FROM pessoas
 WHERE primeiro_nome = 'Pedro'
+
+
+
+
+--Comandos Projeto Aprendizado
+
+--IDENTITY == auto increment
+--VARCHAR == String
+--CHAR == Utilizar para textos até 3 caracteres.
+--Vazio == '' || null
+CREATE TABLE UsuarioTeste
+(
+	Id INT IDENTITY NOT NULL,
+	Nome VARCHAR(100) NOT NULL,
+	Sexo CHAR(1) NOT NULL,
+	IdUsuarioTipo int not null,
+	PRIMARY KEY(Id),
+	FOREIGN KEY(IdUsuarioTipo) REFERENCES UsuarioTipoTeste(Id)
+)
+
+CREATE TABLE UsuarioTipoTeste
+(
+	Id INT IDENTITY NOT NULL,
+	Descricao VARCHAR(20) NOT NULL,
+	PRIMARY KEY(Id)
+)
+INSERT INTO UsuarioTeste VALUES ('Rebelo', 'M', 1)
+
+INSERT INTO UsuarioTipoTeste VALUES ('Estudante')
+INSERT INTO UsuarioTipoTeste VALUES ('Professor')
+INSERT INTO UsuarioTipoTeste VALUES ('Coordenador')
+
+
+--TRANSACTION || TRAN
+BEGIN TRANSACTION
+	INSERT INTO UsuarioTeste (Nome, Sexo) VALUES ('Vinicius Moura', 'M')
+	--UPDATE UsuarioTeste SET Nome = 'Vinicius' WHERE Id = 2
+	--DELETE FROM UsuarioTeste WHERE Id = 2
+
+--ROLLBACK TRAN
+--COMMIT TRAN
+
+--Selecionar tabela
+
+SELECT * FROM UsuarioTeste
+
+--Inserir na tabela
+
+INSERT INTO UsuarioTeste (Nome, Sexo) VALUES ('Vinicius Moura', 'M')
+
+--Alterar na tabela
+
+UPDATE UsuarioTeste SET Nome = 'Vinicius' WHERE Id = 2
+
+--Exclusão na tabela
+DELETE FROM UsuarioTeste  WHERE Id = 2
+
+--Exclusão de tabela
+DROP TABLE UsuarioTeste
+
+--Usando INNER JOIN
+
+SELECT Nome, Sexo, IdUsuarioTipo
+FROM UsuarioTeste
+AS UT
+INNER JOIN UsuarioTipoTeste AS UTT
+ON UT.IdUsuarioTipo = UTT.Id
